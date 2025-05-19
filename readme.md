@@ -1,71 +1,69 @@
 # TipTap React Render
 
-[![npm](https://img.shields.io/npm/v/@troop.com/tiptap-react-render.svg?style=flat)](https://www.npmjs.com/package/@troop.com/tiptap-react-render)
-[![npm](https://img.shields.io/npm/dt/@troop.com/tiptap-react-render)](https://www.npmjs.com/package/@troop.com/tiptap-react-render)
+[![npm](https://img.shields.io/npm/v/@abidmiah128/tiptap-react-render.svg?style=flat)](https://www.npmjs.com/package/@abidmiah128/tiptap-react-render)
+[![npm](https://img.shields.io/npm/dt/@abidmiah128/tiptap-react-render)](https://www.npmjs.com/package/@abidmiah128/tiptap-react-render)
 
 This library renders [TipTap](https://tiptap.dev/) JSON payloads in React clients without embedding the editor.
 
 ### Installation
+
 ```sh
 # npm
-npm install @troop.com/tiptap-react-render
+npm install @abidmiah128/tiptap-react-render
 
 # yarn
-yarn add @troop.com/tiptap-react-render
+yarn add @abidmiah128/tiptap-react-render
 ```
 
 ### Usage
+
 ```typescript
 // handle the document
-const doc: NodeHandler = (props) => (<>{props.children}</>)
+const doc: NodeHandler = (props) => <>{props.children}</>;
 
 // handle a paragraph
 const paragraph: NodeHandler = (props) => {
-  return <p>{props.children}</p>
-}
+  return <p style={props.node.attrs}>{props.children}</p>;
+};
 
 // handle text
 const text: NodeHandler = (props) => {
-  // you could process text marks here from props.node.marks ...
-  return <span>{props.node.text}</span>
-}
+  const { node } = props;
+  let content = <span>{node.text}</span>;
 
+  return content;
+};
 // handle an image
 const img: NodeHandler = (props) => {
   const { src, alt, title } = props.node;
-  return (<img src={src} alt={alt} title={title} />)
-}
+  return <img src={src} alt={alt} title={title} />;
+};
 
 // create a handlers wrapper
 const handlers: NodeHandlers = {
-  "doc": doc,
-  "text": text,
-  "paragraph": paragraph,
-  "img": img,
-}
+  doc: doc,
+  text: text,
+  paragraph: paragraph,
+  img: img,
+};
 
 // sample tip tap data
 const data = {
-  type: "doc",
+  type: 'doc',
   content: [
     {
-      type: "paragraph",
-      content: [{
-        type: "text",
-        text: "hello world"
-      }],
-      type: "paragraph",
-      content: [{
-        type: "img",
-        src: "https://some-url.com/img.jpg",
-        alt: "some alt text"
-      }]
-    }
-  ]
-}
-
+      type: 'paragraph',
+      content: [
+        {
+          type: 'text',
+          text: 'Hey, try to select some text here. There will popup a menu for selecting some inline styles. Remember: you have full control about content and styling of this menu.',
+        },
+      ],
+    },
+  ],
+};
 // render it!
-const rendered = <TipTapRender handlers={handlers} node={data} />
+const rendered = <TipTapRender handlers={handlers} node={data} />;
 ```
 
 ### Why?
