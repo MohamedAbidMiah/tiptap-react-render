@@ -1,4 +1,5 @@
 import React from 'react';
+import { JSX } from 'react/jsx-runtime';
 
 /**
  * Render a tip tap JSON node and all its children
@@ -6,38 +7,33 @@ import React from 'react';
  * @param {NodeHandlers} handlers a handler for each node type
  * @returns tree of components as react elements
  */
-export function TipTapRender(props: {node: TipTapNode, handlers: NodeHandlers}): JSX.Element {
-  const {node, handlers: mapping} = props;
+export function TipTapRender(props: { node: TipTapNode; handlers: NodeHandlers }): JSX.Element {
+  const { node, handlers: mapping } = props;
   // recursively render child content
   const children: JSX.Element[] = [];
-  node.content && node.content.forEach((child, ix) => {
-    children.push(
-      <TipTapRender
-        node={child}
-        handlers={mapping}
-        key={`${child.type}-${ix}`}
-      />
-    )
-  })
+  node.content &&
+    node.content.forEach((child, ix) => {
+      children.push(<TipTapRender node={child} handlers={mapping} key={`${child.type}-${ix}`} />);
+    });
   // return empty if we are missing a handler for this type
   if (!(node.type in props.handlers)) {
-    console.warn(`missing type`, node)
-    return <></>
+    console.warn(`missing type`, node);
+    return <></>;
   }
   // render the handler for this type
-  const Handler = mapping[node.type]
-  return <Handler node={node}>{children}</Handler>
+  const Handler = mapping[node.type];
+  return <Handler node={node}>{children}</Handler>;
 }
 
 interface Attrs {
   readonly [attr: string]: any;
-};
+}
 
 export interface TipTapNode {
-  type: string
-  attrs?: Attrs
-  marks?: Attrs[]
-  content?: TipTapNode[]
+  type: string;
+  attrs?: Attrs;
+  marks?: Attrs[];
+  content?: TipTapNode[];
   readonly [attr: string]: any;
 }
 
@@ -46,8 +42,8 @@ export interface NodeProps {
   node: TipTapNode;
 }
 
-export type NodeHandler = (props: NodeProps) => JSX.Element
+export type NodeHandler = (props: NodeProps) => JSX.Element;
 
 export interface NodeHandlers {
-  readonly [attr: string]: NodeHandler
+  readonly [attr: string]: NodeHandler;
 }
