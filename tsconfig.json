@@ -19,5 +19,6 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": true,
+    "types": ["jest", "node", "@testing-library/jest-dom"]
   }
 }
