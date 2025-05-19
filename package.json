@@ -39,7 +39,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/troop-dev/tiptap-react-render"
+    "url": "https://github.com/MohamedAbidMiah/tiptap-react-render"
   },
   "dependencies": {
     "jest-environment-jsdom": "^29.7.0",
