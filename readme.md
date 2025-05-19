@@ -3,6 +3,8 @@
 [![npm](https://img.shields.io/npm/v/@abidmiah128/tiptap-react-render.svg?style=flat)](https://www.npmjs.com/package/@abidmiah128/tiptap-react-render)
 [![npm](https://img.shields.io/npm/dt/@abidmiah128/tiptap-react-render)](https://www.npmjs.com/package/@abidmiah128/tiptap-react-render)
 
+This is a fork from the [original libary](https://www.npmjs.com/package/@troop.com/tiptap-react-render). Depenceny and build updated to support next 15 and react 19.
+
 This library renders [TipTap](https://tiptap.dev/) JSON payloads in React clients without embedding the editor.
 
 ### Installation
